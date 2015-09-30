@@ -1,0 +1,32 @@
+[core]
+    excludesfile = ~/.gitignore
+    whitespace = trailing-space,space-before-tabconfig
+[user]
+    name = Eric Anderson
+    email = eric@mindworksdev.com
+[filter "lfs"]
+    clean = git lfs clean %f
+    smudge = git lfs smudge %f
+    required = true
+[diff]
+    mnemonicprefix = true
+    renames = copies
+[fetch]
+    prune = true
+    stat = true
+[merge]
+    stat = true
+[alias]
+    aa = add -A
+    archive-tgz = archive -v --format=tgz --output HEAD.tgz HEAD
+    archive-zip = archive -v --format=zip --output HEAD.zip HEAD
+    au = add -u
+    ba = branch -avv
+    br = branch
+    co = checkout
+    ci = commit
+    gr = grep --break --heading
+    last = diff HEAD~1
+    lg = log --graph --pretty=format:'%C(red)%h%C(reset) - %C(green)%s%C(reset) - %C(yellow)(%ar)%C(reset) <%an>'
+    lt = ls-tree -lr --abbrev=6 --full-tree HEAD
+    unstage = reset HEAD --

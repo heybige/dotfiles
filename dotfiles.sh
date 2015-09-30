@@ -21,6 +21,10 @@ if [ ! -f ~/.exrc ]; then
     ln -s ~/.dotfiles/.exrc
 fi
 
+if [ ! -f ~/.gitconfig ]; then
+    ln -s ~/.dotfiles/.gitconfig
+fi
+
 if [ ! -f ~/.gitignore ]; then
     ln -s ~/.dotfiles/.gitignore
 fi
