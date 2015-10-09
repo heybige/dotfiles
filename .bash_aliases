@@ -19,6 +19,13 @@ fi
 # Usage: homestead up, homestead halt
 alias homestead='function __homestead() { (cd ~/Documents/Code/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
 
+function function_exists {
+    FUNCTION_NAME=$1
+    [ -z "$FUNCTION_NAME" ] && return 1
+    declare -F "$FUNCTION_NAME" > /dev/null 2>&1
+    return $?
+}
+
 # global git hook templates - /usr/local/git/share/git-core/templates/hooks
 
 alias g='git'
@@ -34,20 +41,20 @@ alias master='git checkout master'
 
 # http://ubuntuforums.org/showthread.php?t=733397
 
-if [ -f ~/.dotfiles/git-completion.bash ]; then
+if ! function_exists _git_init && [ -f ~/.dotfiles/git-completion.bash ]; then
   source ~/.dotfiles/git-completion.bash
-  if [ -f ~/.dotfiles/.bash_completion_alias.sh ]; then
+  if ! function_exists alias_completion && [ -f ~/.dotfiles/.bash_completion_alias.sh ]; then
     source  ~/.dotfiles/.bash_completion_alias.sh
   fi
   # http://ubuntuforums.org/showthread.php?t=733397
   complete -o default -o nospace -F _git g
-  # complete -o bashdefault -o default -o nospace -F _alias_completion::gb gb 
-  complete -o default -o nospace -F _alias_completion::gb gb 
-  complete -o bashdefault -o default -o nospace -F _alias_completion::gc gc 
-  # complete -o bashdefault -o default -o nospace -F _alias_completion::gd gd 
-  complete -o bashdefault -o default -o nospace -F _alias_completion::gf gf 
-  complete -o bashdefault -o default -o nospace -F _alias_completion::gl gl 
-  # complete -o bashdefault -o default -o nospace -F _alias_completion::gs gs 
+  # complete -o bashdefault -o default -o nospace -F _alias_completion::gb gb
+  complete -o default -o nospace -F _alias_completion::gb gb
+  complete -o bashdefault -o default -o nospace -F _alias_completion::gc gc
+  # complete -o bashdefault -o default -o nospace -F _alias_completion::gd gd
+  complete -o bashdefault -o default -o nospace -F _alias_completion::gf gf
+  complete -o bashdefault -o default -o nospace -F _alias_completion::gl gl
+  # complete -o bashdefault -o default -o nospace -F _alias_completion::gs gs
   # complete -o default -o nospace -F _git_checkout gc
 fi
 
