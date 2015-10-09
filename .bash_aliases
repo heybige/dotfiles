@@ -1,5 +1,7 @@
 # http://laravel-news.com/2014/07/laravel-bash-aliases
 
+# would be nice to 'git fetch; git diff HEAD origin/master' to let me know if there's stuff I need to merge? or just auto-do it?
+
 export EDITOR=vi
 export VISUAL=vi
 export TERM=vt100
@@ -29,6 +31,8 @@ alias gl='git log '
 alias gs='git status '
 
 alias master='git checkout master'
+
+# http://ubuntuforums.org/showthread.php?t=733397
 
 if [ -f ~/.dotfiles/git-completion.bash ]; then
   source ~/.dotfiles/git-completion.bash
@@ -115,6 +119,8 @@ alias grshow='git show FETCH_HEAD'
 alias glshow='git show --name-status --reverse '
 alias gstage='git diff --cached'
 alias gthis='git log master..HEAD'
+# git checkout --track origin/remote-branch-name
+alias gtrack='git checkout --track '
 alias guser='git log --author="heybige" --name-status'
 alias more='less -i -m'
 alias src='cd ~/src'
