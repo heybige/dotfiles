@@ -1,5 +1,7 @@
 # http://laravel-news.com/2014/07/laravel-bash-aliases
 
+export HISTTIMEFORMAT="%d/%m/%y %T "
+
 # would be nice to 'git fetch; git diff HEAD origin/master' to let me know if there's stuff I need to merge? or just auto-do it?
 
 export EDITOR=vi
@@ -27,6 +29,8 @@ function function_exists {
 }
 
 # global git hook templates - /usr/local/git/share/git-core/templates/hooks
+
+# https://github.com/tj/git-extras/blob/master/Commands.md
 
 alias g='git'
 alias ga='git add '
@@ -154,6 +158,17 @@ alias cda="composer dump-autoload -o"
 alias vapro="curl -L http://bit.ly/vaprobash > Vagrantfile"
 
 # netstat -plunt
+
+biggest() {
+    # http://www.cyberciti.biz/faq/how-do-i-find-the-largest-filesdirectories-on-a-linuxunixbsd-filesystem/
+    if [[ ! -z $1 ]]; then
+        DIR=$1
+    else
+        DIR=.
+    fi
+        
+    du -a $DIR  | sort -n -r | head -n 10
+}
 
 laranew() {
 	if [ "$1" ]; then
