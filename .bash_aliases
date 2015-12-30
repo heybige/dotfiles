@@ -179,3 +179,16 @@ laranew() {
 		composer create-project laravel/laravel . --prefer-dist
 	fi
 }
+
+wpupdate() {
+  # check first for wp-includes dir -- what happens if you run wp-cli in a non-WP dir?
+  if [ -f wp-content/object-cache.php ]; then
+    mv -i wp-content/object-cache.php wp-content/object-cache.php.TMP
+  fi
+  wp-cli core update
+  wp-cli core update-db
+  if [ -f wp-content/object-cache.php.TMP ]; then
+    mv -i wp-content/object-cache.php.TMP wp-content/object-cache.php
+  fi
+  sudo service php5-fpm restart
+}
