@@ -21,6 +21,8 @@ fi
 # Usage: homestead up, homestead halt
 alias homestead='function __homestead() { (cd ~/Documents/Code/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
 
+alias whatsmyip='dig +short myip.opendns.com @resolver1.opendns.com'
+
 function function_exists {
     FUNCTION_NAME=$1
     [ -z "$FUNCTION_NAME" ] && return 1
