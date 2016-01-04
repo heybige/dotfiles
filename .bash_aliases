@@ -172,6 +172,27 @@ biggest() {
     du -a $DIR  | sort -n -r | head -n 10
 }
 
+function openssl-view-certificate () {
+    openssl x509 -text -noout -in "${1}"
+}
+
+function openssl-view-csr () {
+    openssl req -text -noout -verify -in "${1}"
+}
+
+function openssl-view-key () {
+    openssl rsa -check -in "${1}"
+}
+
+function openssl-view-pkcs12 () {
+    openssl pkcs12 -info -in "${1}"
+}
+
+# Connecting to a server (Ctrl C exits)
+function openssl-client () {
+    openssl s_client -status -connect "${1}":443
+}
+
 laranew() {
 	if [ "$1" ]; then
 		composer create-project laravel/laravel $1 --prefer-dist
