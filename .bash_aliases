@@ -201,6 +201,51 @@ laranew() {
 	fi
 }
 
+newdomain() {
+    if [ ! "$1" ]; then
+        echo "newdomain [domain]"
+        return
+    fi
+
+    if [[ $EUID -ne 0 ]]; then
+        echo "This script must be run as root" 
+        return
+    fi
+
+    if [ -f "/var/named/db.$1" ]; then
+        echo "/var/named/db.$1 exists - aborting.."
+        return
+    fi
+
+    TODAY=`date +%Y%m%d00`
+
+    cat << EOF >/var/named/db.$1
+\$TTL 3600
+
+$1. IN SOA $1. hostmaster.on-e.com. (
+$TODAY  ;serial
+10800       ;refresh
+3600        ;retry
+604800      ;expire
+3600)       ;minimum (4 hrs)
+
+    IN NS ns1.on-e.com.
+    IN NS ns2.on-e.com.
+    IN NS ns3.on-e.com.
+
+; -----------------------------------------
+; $1
+; -----------------------------------------
+
+www     IN A 192.249.63.243
+
+$1. IN A 192.249.63.243
+        IN MX 10 mail.on-e.com.
+EOF
+
+    echo "/var/named/db.$1 created"
+}
+
 wpupdate() {
   # check first for wp-includes dir -- what happens if you run wp-cli in a non-WP dir?
   if [ -f wp-content/object-cache.php ]; then
