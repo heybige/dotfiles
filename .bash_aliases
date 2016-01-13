@@ -201,6 +201,28 @@ laranew() {
 	fi
 }
 
+pull() {
+  if [ -z $2 ]; then
+    echo "$0 [host] file(s)"
+    return
+  fi
+
+  HOST=$1
+  shift
+  scp -rp "$@" keric@$HOST.on-e.com:~;
+}
+
+push() {
+  if [ -z $2 ]; then
+    echo "$0 [host] file(s)"
+    return
+  fi
+
+  HOST=$1
+  shift
+  scp -rp "$@" keric@$HOST.on-e.com:~;
+}
+
 wpupdate() {
   # check first for wp-includes dir -- what happens if you run wp-cli in a non-WP dir?
   if [ -f wp-content/object-cache.php ]; then
