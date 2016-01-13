@@ -137,6 +137,7 @@ alias gtrack='git checkout --track '
 alias guser='git log --author="heybige" --name-status'
 alias more='less -i -m'
 alias src='cd ~/src'
+alias ubuntu='sudo su - ubuntu'
 
 # Mac Mini only
 alias v='vagrant version && vagrant global-status'
