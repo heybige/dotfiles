@@ -30,3 +30,5 @@
     lg = log --graph --pretty=format:'%C(red)%h%C(reset) - %C(green)%s%C(reset) - %C(yellow)(%ar)%C(reset) <%an>'
     lt = ls-tree -lr --abbrev=6 --full-tree HEAD
     unstage = reset HEAD --
+[push]
+	default = simple
