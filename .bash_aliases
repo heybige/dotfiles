@@ -4,6 +4,9 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 
 # would be nice to 'git fetch; git diff HEAD origin/master' to let me know if there's stuff I need to merge? or just auto-do it?
 
+# - vim: set paste
+# - type foobar
+
 export EDITOR=vi
 export VISUAL=vi
 export TERM=vt100
@@ -71,6 +74,7 @@ alias ba='. ~/.dotfiles/.bash_aliases'
 alias dc='cd '
 alias dir='ls -als'
 alias du='du -k'
+alias elb_errors="egrep '\ 5[0-9][0-9]\ 5[0-9][0-9]\ \d+\ \d+ \"' *.log"
 alias jobs='jobs -l'
 alias ll='ls -la'
 alias llm='ls -la | more'
@@ -141,6 +145,7 @@ alias ubuntu='sudo su - ubuntu'
 
 # Mac Mini only
 alias v='vagrant version && vagrant global-status'
+alias vgs='vagrant global-status'
 alias vst='vagrant status'
 alias vup='vagrant up'
 alias vdo='vagrant halt'
@@ -161,6 +166,14 @@ alias cda="composer dump-autoload -o"
 alias vapro="curl -L http://bit.ly/vaprobash > Vagrantfile"
 
 # netstat -plunt
+
+whichpkg() {
+  if [ -f /etc/centos-release -o -f /etc/redhat-release ]; then
+    rpm -qf $(which $1)
+  else
+    dpkg -S $(which $1)
+  fi
+}
 
 biggest() {
     # http://www.cyberciti.biz/faq/how-do-i-find-the-largest-filesdirectories-on-a-linuxunixbsd-filesystem/
@@ -267,6 +280,10 @@ $1. IN A 192.249.63.243
 EOF
 
     echo "/var/named/db.$1 created"
+}
+
+elb_logs() {
+    aws s3 cp s3://ab-vpc-elb-logs-east-1/AWSLogs/057454812822/elasticloadbalancing/us-east-1/$(date +%Y)/$(date +%m)/$(date +%d) . --recursive
 }
 
 wpupdate() {
